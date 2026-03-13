@@ -1,0 +1,22 @@
+# Terraform
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+.terraform/
+
+# Secrets - never commit
+terraform.tfvars
+
+# Lambda zip artifacts - generated at plan time
+*.zip
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+.env
+.venv/
+venv/
