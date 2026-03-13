@@ -12,6 +12,7 @@ variable "candidate_email" {
 variable "github_repo" {
   description = "GitHub repo URL - embedded in SNS verification payloads"
   type        = string
+  default     = "https://github.com/SaiJithendraGonji/aws-assessment"
 }
 
 variable "cognito_password_secret" {
