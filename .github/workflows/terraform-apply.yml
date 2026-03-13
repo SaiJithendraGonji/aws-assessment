@@ -88,6 +88,15 @@ jobs:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: us-east-1
 
+      - name: Fetch Cognito password
+        run: |
+          PASSWORD=$(aws secretsmanager get-secret-value \
+            --secret-id unleash-live/cognito-test-user-password \
+            --query SecretString \
+            --output text \
+            --region us-east-1)
+          echo "COGNITO_PASSWORD=$PASSWORD" >> $GITHUB_ENV
+
       - name: Run integration tests
         env:
           US_EAST_1_ENDPOINT: ${{ needs.apply.outputs.us_east_1_endpoint }}
@@ -95,4 +104,11 @@ jobs:
           COGNITO_CLIENT_ID: ${{ needs.apply.outputs.cognito_client_id }}
           COGNITO_USER_POOL_ID: ${{ needs.apply.outputs.cognito_user_pool_id }}
           CANDIDATE_EMAIL: ${{ secrets.CANDIDATE_EMAIL }}
-        run: python scripts/test_deployment.py
+        run: |
+          python scripts/test_deployment.py \
+            --user-pool-id "$COGNITO_USER_POOL_ID" \
+            --client-id "$COGNITO_CLIENT_ID" \
+            --email "$CANDIDATE_EMAIL" \
+            --password "$COGNITO_PASSWORD" \
+            --api-us-east-1 "$US_EAST_1_ENDPOINT" \
+            --api-eu-west-1 "$EU_WEST_1_ENDPOINT"
