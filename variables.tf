@@ -1,7 +1,7 @@
 variable "aws_profile" {
-  description = "AWS CLI profile name"
+  description = "AWS CLI profile name, null for CI workflow"
   type        = string
-  default     = "Devops-admin"
+  default     = null
 }
 
 variable "candidate_email" {
