@@ -114,7 +114,7 @@ resource "aws_ecs_task_definition" "sns_publisher" {
       }
 
       readonlyRootFilesystem = true
-      essential = true
+      essential              = true
     }
   ])
 

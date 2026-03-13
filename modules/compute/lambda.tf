@@ -37,16 +37,16 @@ resource "aws_iam_role_policy_attachment" "greeter_basic" {
 
 data "aws_iam_policy_document" "greeter_permissions" {
   statement {
-    sid     = "DynamoDBWrite"
-    effect  = "Allow"
-    actions = ["dynamodb:PutItem"]
+    sid       = "DynamoDBWrite"
+    effect    = "Allow"
+    actions   = ["dynamodb:PutItem"]
     resources = [aws_dynamodb_table.greeting_logs.arn]
   }
 
   statement {
-    sid     = "SNSPublishCrossAccount"
-    effect  = "Allow"
-    actions = ["sns:Publish"]
+    sid       = "SNSPublishCrossAccount"
+    effect    = "Allow"
+    actions   = ["sns:Publish"]
     resources = [var.sns_verification_topic_arn]
   }
 }
@@ -73,9 +73,9 @@ resource "aws_iam_role_policy_attachment" "dispatcher_basic" {
 
 data "aws_iam_policy_document" "dispatcher_permissions" {
   statement {
-    sid     = "ECSRunTask"
-    effect  = "Allow"
-    actions = ["ecs:RunTask"]
+    sid       = "ECSRunTask"
+    effect    = "Allow"
+    actions   = ["ecs:RunTask"]
     resources = [aws_ecs_task_definition.sns_publisher.arn]
   }
 
