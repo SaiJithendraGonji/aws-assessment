@@ -1,0 +1,4 @@
+aws_profile     = "your-aws-profile"
+candidate_email = "your-email@example.com"
+github_repo     = "https://github.com/your-username/aws-assessment"
+# cognito_temp_password = set as TF_VAR_cognito_temp_password env var
